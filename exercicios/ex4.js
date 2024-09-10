@@ -6,11 +6,35 @@ Sapien eget mi proin sed libero enim sed faucibus. Nulla facilisi etiam dignissi
 Amet consectetur adipiscing elit pellentesque habitant morbi. Vel pretium lectus quam id. Elit eget gravida cum sociis natoque penatibus et magnis dis. Purus sit amet volutpat consequat mauris. Leo integer malesuada nunc vel risus commodo. Cursus eget nunc scelerisque viverra mauris in. Diam maecenas ultricies mi eget. Eros in cursus turpis massa tincidunt dui ut ornare lectus. Pharetra magna ac placerat vestibulum lectus mauris ultrices eros. Enim neque volutpat ac tincidunt vitae semper quis lectus. Ac odio tempor orci dapibus ultrices in iaculis nunc sed. Turpis egestas pretium aenean pharetra magna ac placerat vestibulum lectus. Nulla pharetra diam sit amet nisl suscipit adipiscing bibendum est. Eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque. Feugiat nisl pretium fusce id velit ut. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Aliquam faucibus purus in massa tempor nec. Tortor posuere ac ut consequat semper.
 Habitant morbi tristique senectus et netus et. Id donec ultrices tincidunt arcu non sodales neque. Amet consectetur adipiscing elit duis tristique sollicitudin. Lacus sed turpis tincidunt id aliquet risus feugiat in. Sed elementum tempus egestas sed sed risus pretium quam. Gravida dictum fusce ut placerat orci nulla. Cursus vitae congue mauris rhoncus aenean. Amet nisl suscipit adipiscing bibendum. Metus vulputate eu scelerisque felis imperdiet. Nunc vel risus commodo viverra maecenas.`
 
-function ordena(objeto){
-}
+const textoSemVirgulasEPontos = texto.replace(/[,.]/g, '')
+const palavras = textoSemVirgulasEPontos.split(' ')
 
+function ordena(objeto){
+  return objeto.sort((a, b) => {
+    if(a > b){
+      return -1
+    } else if (b < a){
+      return 1
+    }
+    else {
+      return 0
+    }
+  })
+}
 
 function filtra(array){
+  const quantidadeElementos = array.reduce((acc, elem) => {
+    acc[elem] = (acc[elem] || 0) + 1
+    return acc
+  }, {})
+  let quantidadeElementosArray = Object.entries(quantidadeElementos)
+  let palavraMais6ocorrencias = []
+  for (elemento of quantidadeElementosArray){
+    if (elemento[1] >=6){
+      palavraMais6ocorrencias.push(elemento[0])
+    }
+  }
+  return palavraMais6ocorrencias
 }
 
-console.log(filtra(ordena(objetoMaisUsadas)))
+console.log(ordena(filtra(palavras)))
